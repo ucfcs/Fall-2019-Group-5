@@ -6,10 +6,11 @@ using UnityEngine;
 public class UIDisplay : MonoBehaviour
 {
     [Header("Data")]
-    protected UIController control;
+    public UIController control;
     public string Identifier = "";
     public bool IsMain = false;
     public bool IsVisible = true;
+    public ArrayList ChildObjects = new ArrayList();
 
 
     // Start is called before the first frame update
@@ -18,8 +19,13 @@ public class UIDisplay : MonoBehaviour
         //ASSIGN CONTROL A VALUE
         control = FindController();
 
+        //FIND CHILDREN IN ADVANCE
+        FindChildren();
+
         //ADD US TO THE CONTROLLER
         AddToController();
+
+        
     }
 
     protected UIController FindController()
@@ -34,14 +40,45 @@ public class UIDisplay : MonoBehaviour
         control.AddDisplay(this);
     }
 
+    public void FindChildren()
+    {
+        //NON-LINEAR SEARCH
+        foreach (Transform g in this.gameObject.GetComponentsInChildren<Transform>())
+        {
+            //ADD CHILDREN TO LIST
+            ChildObjects.Add(g.gameObject);
+        }
+        return;
+    }
+
     public void EnableDisplay()
     {
-        //TODO: WRITE STUFF HERE
+        //NON-LINEAR SEARCH
+        foreach (GameObject g in ChildObjects)
+        {
+            //SET EACH OBJECT TO ON
+            g.SetActive(true);
+
+            Debug.Log("Set object visible: " + g.name);
+
+            
+        }
+
+        Debug.Log("Done");
+        //TRIGGER VISIBLE BOOLEAN
+        IsVisible = true;
     }
 
     public void DisableDisplay()
     {
-        //TODO: WRITE STUFF HERE
+        //NON-LINEAR SEARCH
+        foreach (GameObject g in ChildObjects)
+        {
+            //SET EACH OBJECT TO ON
+            g.SetActive(false);
+        }
+        //TRIGGER VISIBLE BOOLEAN
+        IsVisible = true;
     }
 
     // Update is called once per frame

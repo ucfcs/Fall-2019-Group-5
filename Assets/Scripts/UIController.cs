@@ -25,8 +25,27 @@ public class UIController : MonoBehaviour
 
     public bool SwitchToDisplay(string Identifier)
     {
-        //TODO: WRITE STUFF HERE
-        return true;
+        //DISABLE CURRENT DISPLAY IF IT EXISTS
+        if (CurrentDisplay != null)
+            CurrentDisplay.DisableDisplay();
+
+        //NON-LINEAR SEARCH
+        foreach (UIDisplay UI in DisplayList)
+        {
+            //IF WE FIND ONE THAT MATCHES THE INPUT
+            if (UI.Identifier == Identifier)
+            {
+
+                //SET CURRENT DISPLAY TO NEW DISPLAY AND ENABLE
+                CurrentDisplay = UI;
+                UI.EnableDisplay();
+                return true;
+            }
+        }
+
+        //WE DIDN'T FIND OUR DISPLAY, SO WE FAILED
+        CurrentDisplay.EnableDisplay();
+        return false;
     }
 
     public bool AddDisplay(UIDisplay display)
@@ -35,6 +54,13 @@ public class UIController : MonoBehaviour
         {
             //ADD TO LIST
             DisplayList.Add(display);
+            display.DisableDisplay();
+
+            //IF THIS IS THE MAIN DISPLAY, SET IT ACTIVE ASAP
+            if (display != null && display.IsMain )
+            {
+                SwitchToDisplay(display.Identifier);
+            }
 
             //SUCCEEDED, SO RETURN TRUE
             return true;
