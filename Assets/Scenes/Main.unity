@@ -796,6 +796,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background
       objectReference: {fileID: 0}
+    - target: {fileID: 9126164068580572200, guid: 8289bd0d53b502a4d920c1733f33ca81,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9126164068580572199, guid: 8289bd0d53b502a4d920c1733f33ca81,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2220,6 +2225,7 @@ GameObject:
   - component: {fileID: 1457397746}
   - component: {fileID: 1457397745}
   - component: {fileID: 1457397744}
+  - component: {fileID: 1457397747}
   m_Layer: 5
   m_Name: Canvas-Panel_BACKGROUND
   m_TagString: Untagged
@@ -2300,6 +2306,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentDisplay: {fileID: 0}
+--- !u!114 &1457397747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1457397742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb63597f2ec4121448d78b117fcf4260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefinedWindowWidth: 460
+  DefinedWindowHeight: 300
+  ScaleOnlyThisObject: 1
+  UseDefinedWindowSettings: 1
 --- !u!1 &1532488492
 GameObject:
   m_ObjectHideFlags: 0
