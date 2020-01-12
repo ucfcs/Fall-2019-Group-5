@@ -2320,8 +2320,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DefinedWindowWidth: 460
   DefinedWindowHeight: 300
+  DisplayZ_ScaleFactor: 0.5
   ScaleOnlyThisObject: 1
   UseDefinedWindowSettings: 1
+  ThreadUpdateRateSeconds: 0.15
 --- !u!1 &1532488492
 GameObject:
   m_ObjectHideFlags: 0

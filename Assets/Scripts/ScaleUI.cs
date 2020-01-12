@@ -8,14 +8,27 @@ public class ScaleUI : MonoBehaviour
     private ArrayList UIelements;
     private ArrayList UIelementsOriginal;
     private int elementID = 0;
-    [Header("Display Setting")]
+    [Header("Display Settings")]
+    [Tooltip("Original Value used for scaling.")]
     public int DefinedWindowWidth;
+    [Tooltip("Original Value used for scaling.")]
     public int DefinedWindowHeight;
+    [Space(20)]
+    [Tooltip("Display Scaling Multiplier")]
+    [Range(0.0f,1.0f)]
     public float DisplayZ_ScaleFactor = 0.5f;
     private float oWidth, oHeight;
+
     [Header("Refinements")]
+    [Tooltip("When checked, only this object will scale. When unchecked, every object will be scaled individually, one object per thread cycle.")]
     public bool ScaleOnlyThisObject = true;
+    [Tooltip("WHen checked, the defined original values will be used. When unchecked, values will be assigned at runtime start.")]
     public bool UseDefinedWindowSettings = true;
+    
+    [Header("Thread Settings")]
+    [Tooltip("The delay time between iterations through this object's main thread. Do not set this value too low.")]
+    [Range(0.01f, 1.0f)]
+    public float ThreadUpdateRateSeconds = 0.15f;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +52,7 @@ public class ScaleUI : MonoBehaviour
             UIelementsOriginal.Add(element);
         }
 
-        InvokeRepeating("UpdateGraphic", 0f, Data.SlowUpdateRate);
+        InvokeRepeating("UpdateGraphic", 0f, ThreadUpdateRateSeconds);
     }
 
     protected void UpdateGraphic()
