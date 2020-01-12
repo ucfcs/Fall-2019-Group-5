@@ -4,21 +4,31 @@ using UnityEngine;
 
 public class ScaleUI : MonoBehaviour
 {
-
+    //Blah blah blah array list stuff.
+    //Stores elements of the User Interface
     private ArrayList UIelements;
     private ArrayList UIelementsOriginal;
+
+    //Internal counter for our element in the array list
     private int elementID = 0;
+
+    //Public values for the inspector
     [Header("Display Settings")]
     [Tooltip("Original Value used for scaling.")]
+    [Min(1)]
     public int DefinedWindowWidth;
     [Tooltip("Original Value used for scaling.")]
+    [Min(1)]
     public int DefinedWindowHeight;
     [Space(20)]
     [Tooltip("Display Scaling Multiplier")]
     [Range(0.0f,1.0f)]
     public float DisplayZ_ScaleFactor = 0.5f;
+
+    //We use this internally
     private float oWidth, oHeight;
 
+    //Public values for the inspector
     [Header("Refinements")]
     [Tooltip("When checked, only this object will scale. When unchecked, every object will be scaled individually, one object per thread cycle.")]
     public bool ScaleOnlyThisObject = true;
@@ -33,8 +43,12 @@ public class ScaleUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        //Define array lists
         UIelements = new ArrayList();
         UIelementsOriginal = new ArrayList();
+
+        //Window value setup
         if (UseDefinedWindowSettings)
         {
             oWidth = DefinedWindowWidth + 0.0f;
@@ -45,6 +59,7 @@ public class ScaleUI : MonoBehaviour
             oHeight = Screen.height + 0.0f;
         }
 
+        //Load up the arraylists
         foreach(UnityEngine.RectTransform element in this.transform.GetComponentsInChildren<RectTransform>())
         {
 
@@ -52,17 +67,24 @@ public class ScaleUI : MonoBehaviour
             UIelementsOriginal.Add(element);
         }
 
+        //Start the thread
         InvokeRepeating("UpdateGraphic", 0f, ThreadUpdateRateSeconds);
     }
 
     protected void UpdateGraphic()
     {
+        //Grab our objects from array lists
+        //  We edit this one
         RectTransform tempElement = UIelements[elementID] as RectTransform;
+        //  Stores original data
+        //     Not currently used
         RectTransform tEOriginal = UIelementsOriginal[elementID] as RectTransform;
 
+        //Scale the objects
         tempElement.localScale = new Vector3(Screen.width / oWidth, Screen.height / oHeight, DisplayZ_ScaleFactor);
-        Debug.Log("Ran on ID " + elementID);
+        /*Debug.Log("Ran on ID " + elementID);*/
 
+        //Increment the counter if we are doing every object
         if(!ScaleOnlyThisObject)
             elementID = (elementID + 1) % UIelements.Count;
         
@@ -71,6 +93,8 @@ public class ScaleUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        //Grab window stuff or whatever
         if (UseDefinedWindowSettings)
         {
             oWidth = DefinedWindowWidth + 0.0f;
