@@ -8,6 +8,7 @@ public class ScaleUI : MonoBehaviour
     //Stores elements of the User Interface
     private ArrayList UIelements;
     private ArrayList UIelementsOriginal;
+    private static ScaleUI instance;
 
     //Internal counter for our element in the array list
     private int elementID = 0;
@@ -43,6 +44,7 @@ public class ScaleUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
 
         //Define array lists
         UIelements = new ArrayList();
@@ -100,5 +102,10 @@ public class ScaleUI : MonoBehaviour
             oWidth = DefinedWindowWidth + 0.0f;
             oHeight = DefinedWindowHeight + 0.0f;
         }
+    }
+
+    public static Vector3 GetScale()
+    {
+        return new Vector3(Screen.width / instance.oWidth, Screen.height / instance.oHeight, instance.DisplayZ_ScaleFactor);
     }
 }

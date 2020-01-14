@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System;
+using UnityEngine.UI;
 
 public class ReplaceSprite : MonoBehaviour
 {
 
     public Sprite GraphicTexture = null;
     public string GraphicLoc = "";
-    public SpriteRenderer Renderer = null;
+    public Image Renderer = null;
     private byte[] FileBytes;
     private Texture2D Tex;
 
