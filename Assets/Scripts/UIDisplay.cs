@@ -74,9 +74,14 @@ public class UIDisplay : MonoBehaviour
         //NON-LINEAR SEARCH
         foreach (GameObject g in ChildObjects)
         {
-            //SET EACH OBJECT TO ON
+            //SET EACH OBJECT TO OFF
             g.SetActive(false);
+
+            Debug.Log("Set object invisible: " + g.name);
+
+
         }
+        Debug.Log("Done");
         //TRIGGER VISIBLE BOOLEAN
         IsVisible = true;
     }
