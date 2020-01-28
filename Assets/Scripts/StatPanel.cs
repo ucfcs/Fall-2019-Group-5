@@ -20,6 +20,8 @@ public class StatPanel : MonoBehaviour
     protected float remainingLifetime;
     protected float maxLifetime;
 
+    public MoveObjectToMouse MoveType;
+
     public void Initialize(StatManager manage, renameObjectClass evidence, string name, string info)
     {
         lManager = manage;
@@ -38,6 +40,7 @@ public class StatPanel : MonoBehaviour
     private void Start()
     {
         InvokeRepeating("SlowUpdate", 0f, Data.SlowUpdateRate / 5f);
+        MoveType.Move();
     }
 
     // Update is called once per frame
@@ -51,7 +54,7 @@ public class StatPanel : MonoBehaviour
             lManager.RemovePanel(this);
         }
         UpdateTextEntries();
-        Locate();
+        //Locate();
     }
 
     private void SlowUpdate()
