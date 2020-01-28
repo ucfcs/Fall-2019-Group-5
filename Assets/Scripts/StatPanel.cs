@@ -54,6 +54,7 @@ public class StatPanel : MonoBehaviour
             lManager.RemovePanel(this);
         }
         UpdateTextEntries();
+        MoveType.Move();
         //Locate();
     }
 
