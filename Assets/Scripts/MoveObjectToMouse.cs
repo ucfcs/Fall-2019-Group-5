@@ -32,6 +32,8 @@ public class MoveObjectToMouse : MonoBehaviour
 
     public void Move()
     {
+        if (ObjectToMove == null)
+            return;
         ObjectToMove.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 88f));
         location = new Vector2(
             (ObjectToMove.position.x - RelativeObject.position.x) / ScaleUI.GetScale().x,

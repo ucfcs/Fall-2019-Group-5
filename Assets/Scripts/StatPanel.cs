@@ -30,9 +30,7 @@ public class StatPanel : MonoBehaviour
         vInfo = info;
 
 
-
-        
-
+        Debug.Log("blah");
         Locate();
         return;
     }

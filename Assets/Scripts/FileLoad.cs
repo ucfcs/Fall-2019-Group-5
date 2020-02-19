@@ -1,7 +1,8 @@
-﻿using System.Collections;
+﻿using SFB;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
-using UnityEditor;
 using UnityEngine.UI;
 
 public class FileLoad : MonoBehaviour
@@ -21,14 +22,14 @@ public class FileLoad : MonoBehaviour
     public void LoadFile()
     {
 
-        Data.MapFileLoc = EditorUtility.OpenFilePanel("File Browser", "", "");
+        Data.MapFileLoc = StandaloneFileBrowser.OpenFilePanel("File Browser", "", "",false)[0];
 
     }
 
     public void LoadVideoFile()
     {
 
-        Data.CurrentVideoFileLoc = EditorUtility.OpenFilePanel("Select a Video", "", "mp4");
+        Data.CurrentVideoFileLoc = StandaloneFileBrowser.OpenFilePanel("Select a Video", "", "mp4",false)[0];
         Text my_text = GameObject.Find("Video Title").GetComponent<Text>();
         my_text.text = "Current Video: \n" + System.IO.Path.GetFileName(Data.CurrentVideoFileLoc);
 
@@ -38,7 +39,7 @@ public class FileLoad : MonoBehaviour
     {
         if (Data.CurrentVideoFileLoc != "")
         {
-            Data.CurrentArtifactFileLoc = EditorUtility.OpenFilePanel("Select an image", "", "");
+            Data.CurrentArtifactFileLoc = StandaloneFileBrowser.OpenFilePanel("Select an image", "", "",false)[0];
             Text txt = GameObject.Find("ArtifactFileName").GetComponent<Text>();
             if (Data.CurrentArtifactFileLoc != "")
             {
