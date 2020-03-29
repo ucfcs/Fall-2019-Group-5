@@ -27,6 +27,18 @@ public class FileLoad : MonoBehaviour
 
     }
 
+    public void LoadWaypointIcon()
+    {
+        Data.WaypointFileLoc = StandaloneFileBrowser.OpenFilePanel("File Browser", "", "png", false)[0];
+    }
+
+    public void LoadIntroductionVideo()
+    {
+        Data.IntroductionVideo = StandaloneFileBrowser.OpenFilePanel("Select the Intro Video", "", "mp4", false)[0];
+        Text my_text = GameObject.Find("Intro Video Text").GetComponent<Text>();
+        my_text.text = "Current Introduction Video:\n" + System.IO.Path.GetFileName(Data.IntroductionVideo);
+    }
+
     public void LoadVideoFile()
     {
 

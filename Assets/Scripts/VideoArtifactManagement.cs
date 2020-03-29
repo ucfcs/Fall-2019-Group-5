@@ -24,15 +24,19 @@ public class VideoArtifactManagement : MonoBehaviour
         Dropdown Supporting = GameObject.Find("Supporting Dropdown").GetComponent<Dropdown>();
         InputField Tooltip = GameObject.Find("Artifact Tooltip").GetComponent<InputField>();
         Text TooltipText = GameObject.Find("Artifact Tooltip Text").GetComponent<Text>();
-        string artifactName = System.IO.Path.GetFileNameWithoutExtension(Data.CurrentArtifactFileLoc);
-        string ArtifactData = Data.CurrentArtifactFileLoc + "| " + TimestampText.text + " " + Supporting.value.ToString() + " " + artifactName + " | " + TooltipText.text;
-        Data.currentVideoFileAndArtifact.Add(ArtifactData);
-        Timestamp.text = "";
-        Tooltip.text = "";
-        Supporting.value = 0;
-        Data.CurrentArtifactFileLoc = "";
-        Text txt = GameObject.Find("ArtifactFileName").GetComponent<Text>();
-        txt.text = "Artifact Added\n Select new Artifact File";
+        if((Data.CurrentArtifactFileLoc != "") && (TimestampText.text != ""))
+        {
+            string artifactName = System.IO.Path.GetFileNameWithoutExtension(Data.CurrentArtifactFileLoc);
+            string ArtifactData = Data.CurrentArtifactFileLoc + "| " + TimestampText.text + " " + Supporting.value.ToString() + " " + artifactName + " | " + TooltipText.text;
+            Data.currentVideoFileAndArtifact.Add(ArtifactData);
+            Timestamp.text = "";
+            Tooltip.text = "";
+            Supporting.value = 0;
+            Data.CurrentArtifactFileLoc = "";
+            Text txt = GameObject.Find("ArtifactFileName").GetComponent<Text>();
+            txt.text = "Artifact Added\n Select new Artifact File";
+        }
+        
         //txt.text = Data.currentVideoFileAndArtifact[1];
     }
 

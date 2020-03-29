@@ -53,5 +53,10 @@ public class MoveObjectToMouse : MonoBehaviour
         {
         }
 
+        Data.map_height = GameObject.Find("The Actual Map").GetComponent<RectTransform>().rect.height;
+        Data.map_width = GameObject.Find("The Actual Map").GetComponent<RectTransform>().rect.width;
+        UnityEngine.Debug.Log("Location X: " + string.Format("{0:N2}", location.x));
+        UnityEngine.Debug.Log("Location Y: " + string.Format("{0:N2}", (1 - location.y)));
+
     }
 }

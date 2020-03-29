@@ -6,6 +6,8 @@ public class Data : MonoBehaviour
 {
     public static float SlowUpdateRate = 0.15f;
 
+    public static string WaypointFileLoc = "";
+    public static string IntroductionVideo = "";
     public static Sprite MapTexture = null;
     public static string MapFileLoc = "";
     public static string CurrentVideoFileLoc = "";
@@ -17,6 +19,8 @@ public class Data : MonoBehaviour
     public static List<List<string>> VideoFileAndArtifactLocs = new List<List<string>>();
     public static List<string> currentVideoFileAndArtifact;
     public static List<Vector2> MapLocations;
+    public static float map_height;
+    public static float map_width;
 
     public enum MathFunction
     {
