@@ -1,13 +1,17 @@
-﻿using SFB;
+﻿using SimpleFileBrowser;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using System;
 
 public class FileLoad : MonoBehaviour
 {
+    private bool onCancel;
+
+    // FileBrowser.OnCancel onCancel;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,26 +27,101 @@ public class FileLoad : MonoBehaviour
     public void LoadFile()
     {
 
-        Data.MapFileLoc = StandaloneFileBrowser.OpenFilePanel("File Browser", "", "",false)[0];
+        StartCoroutine(LoadMapFile());
+    }
 
+    public IEnumerator LoadMapFile()
+    {
+
+        // Show a load file dialog and wait for a response from user
+        // Load file/folder: file, Initial path: default (Documents), Title: "Load File", submit button text: "Load"
+        yield return FileBrowser.WaitForLoadDialog(false, null, "Load File", "Load");
+
+        // Dialog is closed
+        // Print whether a file is chosen (FileBrowser.Success)
+        // and the path to the selected file (FileBrowser.Result) (null, if FileBrowser.Success is false)
+        Debug.Log(FileBrowser.Success + " " + FileBrowser.Result);
+
+        if (FileBrowser.Success)
+        {
+            Data.MapFileLoc = FileBrowser.Result;
+        }
+
+    }
+
+    private void onSuccess(string obj)
+    {
+        return;
     }
 
     public void LoadWaypointIcon()
     {
-        Data.WaypointFileLoc = StandaloneFileBrowser.OpenFilePanel("File Browser", "", "png", false)[0];
+
+        StartCoroutine(LoadWaypointIcon2());
     }
 
+    public IEnumerator LoadWaypointIcon2()
+    {
+
+        // Show a load file dialog and wait for a response from user
+        // Load file/folder: file, Initial path: default (Documents), Title: "Load File", submit button text: "Load"
+        yield return FileBrowser.WaitForLoadDialog(false, null, "Load File", "Load");
+
+        // Dialog is closed
+        // Print whether a file is chosen (FileBrowser.Success)
+        // and the path to the selected file (FileBrowser.Result) (null, if FileBrowser.Success is false)
+        Debug.Log(FileBrowser.Success + " " + FileBrowser.Result);
+
+        if (FileBrowser.Success)
+        {
+            Data.WaypointFileLoc = FileBrowser.Result;
+        }
+    }
     public void LoadIntroductionVideo()
     {
-        Data.IntroductionVideo = StandaloneFileBrowser.OpenFilePanel("Select the Intro Video", "", "mp4", false)[0];
+
+        StartCoroutine(LoadIntroductionVideo2());
+    }
+    public IEnumerator LoadIntroductionVideo2()
+    {
+        // Show a load file dialog and wait for a response from user
+        // Load file/folder: file, Initial path: default (Documents), Title: "Load File", submit button text: "Load"
+        yield return FileBrowser.WaitForLoadDialog(false, null, "Load File", "Load");
+
+        // Dialog is closed
+        // Print whether a file is chosen (FileBrowser.Success)
+        // and the path to the selected file (FileBrowser.Result) (null, if FileBrowser.Success is false)
+        Debug.Log(FileBrowser.Success + " " + FileBrowser.Result);
+
+        if (FileBrowser.Success)
+        {
+            Data.IntroductionVideo = FileBrowser.Result;
+        }
         Text my_text = GameObject.Find("Intro Video Text").GetComponent<Text>();
         my_text.text = "Current Introduction Video:\n" + System.IO.Path.GetFileName(Data.IntroductionVideo);
     }
 
+
     public void LoadVideoFile()
     {
 
-        Data.CurrentVideoFileLoc = StandaloneFileBrowser.OpenFilePanel("Select a Video", "", "mp4",false)[0];
+        StartCoroutine(LoadVideoFile2());
+    }
+    public IEnumerator LoadVideoFile2()
+    {
+        // Show a load file dialog and wait for a response from user
+        // Load file/folder: file, Initial path: default (Documents), Title: "Load File", submit button text: "Load"
+        yield return FileBrowser.WaitForLoadDialog(false, null, "Load File", "Load");
+
+        // Dialog is closed
+        // Print whether a file is chosen (FileBrowser.Success)
+        // and the path to the selected file (FileBrowser.Result) (null, if FileBrowser.Success is false)
+        Debug.Log(FileBrowser.Success + " " + FileBrowser.Result);
+
+        if (FileBrowser.Success)
+        {
+            Data.CurrentVideoFileLoc = FileBrowser.Result;
+        }
         Text my_text = GameObject.Find("Video Title").GetComponent<Text>();
         my_text.text = "Current Video: \n" + System.IO.Path.GetFileName(Data.CurrentVideoFileLoc);
         Data.CurrentVideoIndex = -1;
@@ -58,7 +137,7 @@ public class FileLoad : MonoBehaviour
                 if (item.Contains(Data.CurrentVideoFileLoc))
                 {
                     Data.currentVideoFileAndArtifact = item;
-                    return;
+                    break;
                 }
             }
         }
@@ -68,12 +147,28 @@ public class FileLoad : MonoBehaviour
         Data.currentVideoFileAndArtifact = newList;
 
     }
-
     public void LoadArtifactFile()
+    {
+
+        StartCoroutine(LoadArtifactFile2());
+    }
+    public IEnumerator LoadArtifactFile2()
     {
         if (Data.CurrentVideoFileLoc != "")
         {
-            Data.CurrentArtifactFileLoc = StandaloneFileBrowser.OpenFilePanel("Select an image", "", "",false)[0];
+            // Show a load file dialog and wait for a response from user
+            // Load file/folder: file, Initial path: default (Documents), Title: "Load File", submit button text: "Load"
+            yield return FileBrowser.WaitForLoadDialog(false, null, "Load File", "Load");
+
+            // Dialog is closed
+            // Print whether a file is chosen (FileBrowser.Success)
+            // and the path to the selected file (FileBrowser.Result) (null, if FileBrowser.Success is false)
+            Debug.Log(FileBrowser.Success + " " + FileBrowser.Result);
+
+            if (FileBrowser.Success)
+            {
+                Data.CurrentArtifactFileLoc = FileBrowser.Result;
+            }
             Text txt = GameObject.Find("ArtifactFileName").GetComponent<Text>();
             if (Data.CurrentArtifactFileLoc != "")
             {
