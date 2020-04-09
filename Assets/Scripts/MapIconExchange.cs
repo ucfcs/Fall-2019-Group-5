@@ -11,6 +11,7 @@ public class MapIconExchange : MonoBehaviour
     public Transform SwitchableObject;
     public MoveObjectToMouse TargetSwapTarget;
     public Vector2 location = Vector2.zero;
+    public string locationString = "";
 
     public Color activeColor = Color.blue;
     public Color inactiveColor = Color.white;
