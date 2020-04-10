@@ -22,7 +22,7 @@ public class MapIconExchange : MonoBehaviour
     void Start()
     {
         SwitchableObject = Instantiate(Spawnable);
-        SwitchableObject.SetParent(this.transform.parent);
+        SwitchableObject.SetParent(this.transform);
         ToggleObject();
     }
 
