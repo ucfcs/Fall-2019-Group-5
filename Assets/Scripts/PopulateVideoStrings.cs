@@ -125,8 +125,6 @@ public class PopulateVideoStrings : MonoBehaviour
                     try
                     {
                         Data.MapLocations[StringTexts.IndexOf(list[0])] = (SpawnedList[StringTexts.IndexOf(list[0])] as Transform).GetComponent<MapIconExchange>().location;
-                        Data.MapLocationsStr[StringTexts.IndexOf(list[0])] = (SpawnedList[StringTexts.IndexOf(list[0])] as Transform).GetComponent<MapIconExchange>().locationString;
-                        UnityEngine.Debug.Log(Data.MapLocationsStr[StringTexts.IndexOf(list[0])]);
                     }
                     catch (System.Exception ex) { }
                     string fname = System.IO.Path.GetFileNameWithoutExtension(list[0]);

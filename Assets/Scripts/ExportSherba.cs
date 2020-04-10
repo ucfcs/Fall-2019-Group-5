@@ -90,13 +90,12 @@ public class ExportSherba : MonoBehaviour
                 new System.IO.StreamWriter(waypointFileName))
         {
             int ctr = 0;
-            foreach(string wantedVector in Data.MapLocationsStr)
+            foreach(Vector2 wantedVector in Data.MapLocations)
             {
 
-                //UnityEngine.Debug.Log("Location X: " + wantedVector.x.ToString());
-                //UnityEngine.Debug.Log("Location Y: " + (1 - wantedVector.y).ToString());
-                UnityEngine.Debug.Log("Locations: " + wantedVector);
-                string writeWaypoints = wantedVector + " " + System.IO.Path.GetFileNameWithoutExtension(Data.VideoFileAndArtifactLocs[ctr][0]);
+                UnityEngine.Debug.Log("Location X: " + wantedVector.x.ToString());
+                UnityEngine.Debug.Log("Location Y: " + (1 - wantedVector.y).ToString());
+                string writeWaypoints = wantedVector.x.ToString() + " " + (1 - wantedVector.y).ToString() + " " + System.IO.Path.GetFileNameWithoutExtension(Data.VideoFileAndArtifactLocs[ctr][0]);
                 file2.WriteLine(writeWaypoints);
 
                 ctr++;//Increase the counter to designate which video waypoint we're at.

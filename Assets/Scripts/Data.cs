@@ -19,7 +19,6 @@ public class Data : MonoBehaviour
     public static List<List<string>> VideoFileAndArtifactLocs = new List<List<string>>();
     public static List<string> currentVideoFileAndArtifact;
     public static List<Vector2> MapLocations;
-    public static List<string> MapLocationsStr;
     public static float map_height;
     public static float map_width;
 

@@ -48,11 +48,7 @@ public class MoveObjectToMouse : MonoBehaviour
         try
         {
             if (ObjectToMove != null && ObjectToMove.parent.GetComponent<MapIconExchange>() != null)
-            {
                 ObjectToMove.parent.GetComponent<MapIconExchange>().location = location;
-                ObjectToMove.parent.GetComponent<MapIconExchange>().locationString = location.x.ToString() + " " + location.y.ToString();
-            }
-                
         }catch(System.NullReferenceException ex)
         {
         }
