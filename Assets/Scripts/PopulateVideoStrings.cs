@@ -62,6 +62,7 @@ public class PopulateVideoStrings : MonoBehaviour
                 Destroy(temporary.SwitchableObject.gameObject);
                 Data.VideoFileAndArtifactLocs.RemoveAt(i);
                 Data.MapLocations.RemoveAt(i);
+                Data.ToolTipList.RemoveAt(i);
                 StringTexts.RemoveAt(i);
                 Destroy(temporary.gameObject);
                 numberOfItemsManaged--;
@@ -142,6 +143,7 @@ public class PopulateVideoStrings : MonoBehaviour
                     );
 
                     Data.MapLocations.Add(Vector2.zero);
+                    Data.ToolTipList.Add("");
 
                     numberOfItemsManaged++;
 
