@@ -26,29 +26,39 @@ public class SubmitToolTip : MonoBehaviour
         }
     }
 
-    public void Summon()
+    void FinishSummon()
     {
         weHere = true;
-        this.GetComponent<RectTransform>().localPosition = new Vector3(0f,0f,0f);
+        this.transform.parent.GetComponent<RectTransform>().localPosition = new Vector3(0f, 0f, 0f);
         Transform current = null;
-        foreach(Transform t in ListOwner.SpawnedList)
+        foreach (Transform t in ListOwner.SpawnedList)
         {
             if (t.GetComponent<MapIconExchange>().isActive)
             {
                 current = t;
                 OurExchanger = current.GetComponent<MapIconExchange>();
                 break;
-                
+
             }
-            
+
         }
         this.GetComponent<UnityEngine.UI.InputField>().text = Data.ToolTipList[current.GetComponent<MapIconExchange>().ourID];
+
+    }
+
+    public void Summon()
+    {
+        if (weHere)
+            return;
+        Invoke("FinishSummon", 0.25f);
+        
     }
 
     public void OnSubmit(string value)
     {
+        
         weHere = false;
         Data.ToolTipList[OurExchanger.ourID] = value;
-        this.GetComponent<RectTransform>().localPosition = new Vector3(555f, 555f, 0f);
+        this.transform.parent.GetComponent<RectTransform>().localPosition = new Vector3(555f, 555f, 0f);
     }
 }
