@@ -22,6 +22,7 @@ public class ExportSherba : MonoBehaviour
 
     public void ExportSherbaProject()
     {
+        //Set the export button to false so they don't attempt to export the same project multiple times.
         Button my_button = GameObject.Find("Export").GetComponent<Button>();
         my_button.interactable = false;
         string fileName = "test.txt";
@@ -38,10 +39,16 @@ public class ExportSherba : MonoBehaviour
         System.IO.Directory.CreateDirectory(targetPath);
         string basicObjTarget = targetPath + @"\" + "Introduction.mp4";
         System.IO.File.Copy(Data.IntroductionVideo, basicObjTarget);
+        //Grab the file location of the Introdcution video and copy it into the Sherba folder under the name "Introduction.mp4"
+
         basicObjTarget = targetPath + @"\" + "map.png";
         System.IO.File.Copy(Data.MapFileLoc, basicObjTarget);
+        //Grab the file location of the map image and copy it into the Sherba folder under the name "map.png"
+
         basicObjTarget = targetPath + @"\" + "waypoint.png";
         System.IO.File.Copy(Data.WaypointFileLoc, basicObjTarget);
+        //Grab the location of the waypoint icon and copy it into the Sherba folder 
+
         foreach (List<string> item in Data.VideoFileAndArtifactLocs)
         {
             
@@ -50,10 +57,14 @@ public class ExportSherba : MonoBehaviour
             fileName = System.IO.Path.GetFileName(item[0]);
             string destFile = System.IO.Path.Combine(targetPath, fileName);
             System.IO.File.Copy(sourceFile, destFile, true);
+            //Copy the lecture video into the Sherba folder
+
             string newDirectory = targetPath + @"\" + System.IO.Path.ChangeExtension(fileName, null);
             System.IO.Directory.CreateDirectory(newDirectory);
+            //Create a directory named after the video to store the artifact info in.
+
             string itemFileName = newDirectory + @"\items.txt";
-            // Check if file already exists. If yes, delete it.     
+            // Check if an items text file in the newly created directory already exists. If yes, delete it.     
             if (File.Exists(itemFileName))
             {
                 File.Delete(itemFileName);
@@ -68,9 +79,12 @@ public class ExportSherba : MonoBehaviour
                     {
                         string[] splitLine = line.Split('|');
                         string writeMe = splitLine[1] + "|" + splitLine[2];
+                        //Split the artifact string into the correct pieces and format it to fit the Student Build's mod loader format.
                         file.WriteLine(writeMe.Remove(0, 1));
+                        //Write the artifact info into the items text file
                         string artifactDestination = newDirectory + @"\" + System.IO.Path.GetFileName(splitLine[0]);
                         System.IO.File.Copy(splitLine[0], artifactDestination);
+                        //Copy the Artifact picture into the items text file.
                     }
                 }
             }
@@ -81,7 +95,7 @@ public class ExportSherba : MonoBehaviour
 
         
         string waypointFileName = targetPath + @"\waypoints.txt";
-        // Check if file already exists. If yes, delete it. 
+        // Check if a waypoints file already exists. If yes, delete it. 
         if (File.Exists(waypointFileName))
         {
             File.Delete(waypointFileName);
@@ -95,8 +109,10 @@ public class ExportSherba : MonoBehaviour
 
                 UnityEngine.Debug.Log("Location X: " + wantedVector.x.ToString());
                 UnityEngine.Debug.Log("Location Y: " + (1 - wantedVector.y).ToString());
+                //Debug to show which locations are being written
                 string writeWaypoints = wantedVector.x.ToString() + " " + (1 - wantedVector.y).ToString() + " " + System.IO.Path.GetFileNameWithoutExtension(Data.VideoFileAndArtifactLocs[ctr][0]) + " | " + Data.ToolTipList[ctr];
                 file2.WriteLine(writeWaypoints);
+                //Write the waypoint info to waypoints.txt
 
                 ctr++;//Increase the counter to designate which video waypoint we're at.
             }
@@ -104,10 +120,7 @@ public class ExportSherba : MonoBehaviour
 
 
 
-
-        // To copy a file to another location and 
-        // overwrite the destination file if it already exists.
-        //System.IO.File.Copy(sourceFile, destFile, true);
+        //Zip the Sherba Directory and name it SherbaProject
         ZipFile.CreateFromDirectory(targetPath, sourcePath + @"\SherbaProject.zip");
         my_button.interactable = true;
     }

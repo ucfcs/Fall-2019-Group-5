@@ -99,6 +99,7 @@ public class FileLoad : MonoBehaviour
         }
         Text my_text = GameObject.Find("Intro Video Text").GetComponent<Text>();
         my_text.text = "Current Introduction Video:\n" + System.IO.Path.GetFileName(Data.IntroductionVideo);
+        //Save the Intro Video into Data and then update the text on screen.
     }
 
 
@@ -124,6 +125,8 @@ public class FileLoad : MonoBehaviour
         }
         Text my_text = GameObject.Find("Video Title").GetComponent<Text>();
         my_text.text = "Current Video: \n" + System.IO.Path.GetFileName(Data.CurrentVideoFileLoc);
+        //Save the video into data and update the text on screen.
+
         Data.CurrentVideoIndex = -1;
         if (Data.VideoFileAndArtifactLocs != null)
         {
@@ -145,6 +148,7 @@ public class FileLoad : MonoBehaviour
         List<string> newList = new List<string>();
         newList.Add(Data.CurrentVideoFileLoc);
         Data.currentVideoFileAndArtifact = newList;
+        //If there isn't a container in the list of video files/artifacts that contains the video location, that means we haven't used this list and need to add it to the list.
 
     }
     public void LoadArtifactFile()
@@ -165,6 +169,8 @@ public class FileLoad : MonoBehaviour
             // and the path to the selected file (FileBrowser.Result) (null, if FileBrowser.Success is false)
             Debug.Log(FileBrowser.Success + " " + FileBrowser.Result);
 
+
+            //Save the artifact file location and then update the code to reflect the fact that the file was loaded.
             if (FileBrowser.Success)
             {
                 Data.CurrentArtifactFileLoc = FileBrowser.Result;

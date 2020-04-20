@@ -24,11 +24,16 @@ public class VideoArtifactManagement : MonoBehaviour
         Dropdown Supporting = GameObject.Find("Supporting Dropdown").GetComponent<Dropdown>();
         InputField Tooltip = GameObject.Find("Artifact Tooltip").GetComponent<InputField>();
         Text TooltipText = GameObject.Find("Artifact Tooltip Text").GetComponent<Text>();
+        //Grab the variables for each relevant artifact data the user inputted.
+
         if((Data.CurrentArtifactFileLoc != "") && (TimestampText.text != ""))
         {
+            //If the user selected a file and timestamp then go ahead and save all the data in a string inside the list for videos and artifacts.
             string artifactName = System.IO.Path.GetFileNameWithoutExtension(Data.CurrentArtifactFileLoc);
             string ArtifactData = Data.CurrentArtifactFileLoc + "| " + TimestampText.text + " " + Supporting.value.ToString() + " " + artifactName + " | " + TooltipText.text;
             Data.currentVideoFileAndArtifact.Add(ArtifactData);
+
+            //Then reset all the values to default and update the text.
             Timestamp.text = "";
             Tooltip.text = "";
             Supporting.value = 0;
@@ -46,6 +51,8 @@ public class VideoArtifactManagement : MonoBehaviour
         {
             Data.VideoFileAndArtifactLocs.Add(Data.currentVideoFileAndArtifact);
         }
+        //Save the current list of videos and Artifacts back into the array of saved videos and artifacts.
+
         Data.CurrentArtifactFileLoc = "";
         Data.CurrentVideoFileLoc = "";
         Text video_text = GameObject.Find("Video Title").GetComponent<Text>();
@@ -53,6 +60,7 @@ public class VideoArtifactManagement : MonoBehaviour
         Text txt = GameObject.Find("ArtifactFileName").GetComponent<Text>();
         txt.text = "Select an Artifact";
         Data.currentVideoFileAndArtifact = null;
+        //Then reset all the values so we're good for a new video to be loaded.
 
 
     }
